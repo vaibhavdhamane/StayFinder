@@ -40,8 +40,8 @@
     </div>
 
     <div class="navbar-nav ms-auto">
-      <form class="d-flex">
-      <input class="form-control me-2 search-input" type="search" placeholder="Search destinations">
+      <form class="d-flex" method="POST" action="/listings/ai-search">
+      <input class="form-control me-2 search-input" type="search" name="query" maxlength="300" required autocomplete="off" aria-label="Describe the stay you are looking for" placeholder="Try: quiet Goa stay under ₹5000" value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>">
       <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
     </form>
 

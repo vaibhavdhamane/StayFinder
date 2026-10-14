@@ -5,6 +5,7 @@ require("dotenv").config();
 
 const express = require("express");
 const app = express();
+app.set("trust proxy", 1);
 const mongoose = require("mongoose");
 const path = require("path");
 const methodOverride = require("method-override");
@@ -67,8 +68,6 @@ const sessionOptions = {
     },
 };
 
-
-
 app.use(session(sessionOptions));
 app.use(flash());
 
@@ -102,8 +101,6 @@ app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
 
-
-
 // 404 handler (NO PATH)
 app.use((req, res, next) => {
     next(new ExpressError(404, "Page Not Found!"));
@@ -119,4 +116,3 @@ app.listen(8080, () => {
     console.log("Server is listening to port 8080");
 
 });
-

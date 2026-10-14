@@ -21,8 +21,9 @@
 
     <div class="mb-3">
       <label class="form-label">Description</label>
-      <textarea name="listing[description]" class="form-control" required><%=listing.description%></textarea>
+      <textarea id="listing-description" name="listing[description]" class="form-control" required><%=listing.description%></textarea>
       <div class="invalid-feedback">Please Enter a Short Description</div>
+      <%- include("./_aiDescription.ejs") %>
     </div>
 
     <div class="mb-3"> 

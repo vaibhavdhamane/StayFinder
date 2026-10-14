@@ -23,9 +23,11 @@ enctype="multipart/form-data">
   <div class="mb-3">
     <label class="form-label">Description</label>
     <textarea
+      id="listing-description"
       name="listing[description]"
       class="form-control" required></textarea>
        <div class="invalid-feedback">Please Enter a Short Description</div>
+       <%- include("./_aiDescription.ejs") %>
 
   </div>
 

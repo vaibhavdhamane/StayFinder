@@ -4,15 +4,18 @@
         <style>
             #filters {
                 display: flex;
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
                 align-items: center;
+                gap: 1rem;
+                overflow-x: auto;
+                padding-bottom: 0.25rem;
             }
 
             .filter {
                 text-align: center;
-                margin-right: 2rem;
                 margin-top: 2rem;
                 opacity: 0.7;
+                flex: 0 0 auto;
             }
 
             .filter:hover {
@@ -32,9 +35,12 @@
                 border-radius: 1rem;
                 height: 3rem;
                 padding: 1rem;
-                margin-left: 2rem;
                 display: flex;
                 align-items: center;
+                flex: 0 0 auto;
+                margin-top: 0.5rem;
+                margin-left: 1rem;
+                margin-right: 1rem;
             }
 
         </style>
@@ -107,6 +113,54 @@
         </div>
 
         <div class="container">
+            <% if (searchError) { %>
+                <div class="alert alert-warning mt-4" role="alert">
+                    <%= searchError %>
+                </div>
+            <% } %>
+
+            <% if (searchExecuted) { %>
+                <section class="mt-4" aria-live="polite">
+                    <h2 class="h4">
+                        <% if (searchFilters.location) { %>
+                            Stays in <span class="text-capitalize"><%= searchFilters.location %></span>
+                        <% } else if (searchFilters.country) { %>
+                            Stays in <span class="text-capitalize"><%= searchFilters.country %></span>
+                        <% } else { %>
+                            Matching stays
+                        <% } %>
+                    </h2>
+                    <p class="mb-2"><strong><%= allListings.length %> matching listing<%= allListings.length === 1 ? "" : "s" %></strong> found.</p>
+
+                    <% if ((searchFilters.location && searchFilters.country) || searchFilters.minPrice !== null || searchFilters.maxPrice !== null || searchFilters.sortBy || searchFilters.keywords.length) { %>
+                        <p class="text-muted mb-2">Filters applied:
+                            <% if (searchFilters.location && searchFilters.country) { %> Country: <span class="text-capitalize"><%= searchFilters.country %></span>;<% } %>
+                            <% if (searchFilters.minPrice !== null) { %> Minimum price: ₹<%= searchFilters.minPrice.toLocaleString("en-IN") %>;<% } %>
+                            <% if (searchFilters.maxPrice !== null) { %> Maximum price: ₹<%= searchFilters.maxPrice.toLocaleString("en-IN") %>;<% } %>
+                            <% if (searchFilters.sortBy === "price_asc") { %> Sort: lowest price first;<% } %>
+                            <% if (searchFilters.sortBy === "price_desc") { %> Sort: highest price first;<% } %>
+                            <% if (searchFilters.keywords.length) { %> Details: <%= searchFilters.keywords.join(", ") %>;<% } %>
+                        </p>
+                    <% } %>
+
+                    <% if (searchUnsupportedCriteria.length) { %>
+                        <p class="alert alert-info">This app cannot currently filter by: <%= searchUnsupportedCriteria.join(", ") %>.</p>
+                    <% } %>
+
+                    <% if (searchMatchNote) { %>
+                        <p class="alert alert-info"><%= searchMatchNote %></p>
+                    <% } %>
+                </section>
+
+                <% if (allListings.length === 0) { %>
+                    <div class="text-center border rounded p-5 my-4">
+                        <h3 class="h5">No matching listings found</h3>
+                        <p class="text-muted">Try another location, adjust your budget, or use fewer details. Search only returns listings that exist in the database.</p>
+                        <a class="btn btn-outline-dark" href="/listings">Browse all listings</a>
+                    </div>
+                <% } %>
+            <% } %>
+
             <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 mt-3">
 
                 <% for(let listing of allListings) { %>
