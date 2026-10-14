@@ -18,7 +18,7 @@ Follow the local setup steps in [README.md](README.md). The app uses Node.js 22.
 - Keep each pull request focused on one change.
 - Describe the user-visible change and link the related issue, if there is one.
 - Include screenshots for visible UI changes when useful.
-- Explain how you checked the change. This repository does not currently have an automated test suite.
+- Explain how you checked the change. GitHub Actions installs dependencies and checks JavaScript syntax, but this repository does not yet have an automated behavioral test suite.
 - Update the README when setup steps or environment variables change.
 
 ## Good places to start
