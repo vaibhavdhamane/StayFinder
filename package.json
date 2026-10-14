@@ -2,17 +2,21 @@
   "engines": {
     "node": "22.15.0"
   },
-  "name": "majorproject",
+  "name": "stayfinder",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "seed": "node init/index.js"
   },
-  "keywords": [],
+  "keywords": [
+    "express",
+    "mongodb",
+    "vacation-rentals"
+  ],
   "author": "Vaibhav Dhamane",
   "license": "ISC",
-  "description": "",
+  "description": "A vacation-rental listing app built with Express, MongoDB, and EJS.",
   "dependencies": {
     "@google/genai": "^2.28.0",
     "@mapbox/mapbox-sdk": "^0.16.2",
